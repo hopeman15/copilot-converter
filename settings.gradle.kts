@@ -1,5 +1,9 @@
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
-}
 rootProject.name = "copilot-converter"
 
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            from(files("gradle/dependencies.versions.toml"))
+        }
+    }
+}
