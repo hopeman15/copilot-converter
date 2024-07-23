@@ -1,4 +1,15 @@
-# Intellij Idea
-.idea
-out
+# Build
+.gradle
+build/
+
+# IntelliJ
 *.iml
+*.ipr
+*.iws
+.idea/
+
+# Misc
+.DS_Store
+
+# other stuff
+/*/out
