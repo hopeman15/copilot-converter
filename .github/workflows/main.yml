@@ -76,4 +76,9 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: Test
-        run: make test
+        run: make test report
+      - name: "Upload Coverage Report"
+        uses: codecov/codecov-action@v4.5.0
+        with:
+          files: ./build/reports/kover/result.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
