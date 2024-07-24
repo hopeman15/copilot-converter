@@ -4,6 +4,7 @@ plugins {
     // Quality Gate
     alias(libs.plugins.detekt)
     alias(libs.plugins.kotlinter)
+    alias(libs.plugins.kover)
 }
 
 group = "com.hellocuriosity"
