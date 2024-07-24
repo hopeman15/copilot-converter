@@ -1,5 +1,8 @@
 GRADLE_ARGS ?= --build-cache --parallel
 
+all: clean lint build test
+.PHONY: all
+
 build:
 	./gradlew build ${GRADLE_ARGS}
 .PHONY: build
