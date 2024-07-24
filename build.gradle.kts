@@ -1,5 +1,9 @@
 plugins {
     kotlin("jvm") version libs.versions.kotlin.get()
+
+    // Quality Gate
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.kotlinter)
 }
 
 group = "com.hellocuriosity"
