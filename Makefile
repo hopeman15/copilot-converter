@@ -1,6 +1,6 @@
 GRADLE_ARGS ?= --build-cache --parallel
 
-all: clean lint build test
+all: clean format lint build test report
 .PHONY: all
 
 build:

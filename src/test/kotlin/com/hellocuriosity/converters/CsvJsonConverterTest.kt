@@ -1,16 +1,17 @@
 package com.hellocuriosity.converters
 
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
-import org.junit.jupiter.api.Assertions.assertEquals
 import java.io.File
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class CsvJsonConverterTest {
     private val converter = CsvJsonConverter
-    private val csvContent =
+    private val csvContent: Csv =
         """
         name,age,city
         Alice,30,New York
@@ -18,7 +19,7 @@ class CsvJsonConverterTest {
         Charlie,35,Chicago
         """.trimIndent()
 
-    private val expectedJson =
+    private val jsonContent =
         buildJsonArray {
             add(
                 buildJsonObject {
@@ -45,7 +46,9 @@ class CsvJsonConverterTest {
 
     @Test
     fun `CSV conversion fails due to missing CSV file`() {
-        assertFailsWith<IllegalArgumentException> { converter.from("missing.csv") }
+        val missing = "missing.csv"
+        val exception = assertFailsWith<IllegalArgumentException> { converter.from(missing) }
+        assertEquals("File $missing does not exist or is not a valid file", exception.message)
     }
 
     @Test
@@ -53,7 +56,8 @@ class CsvJsonConverterTest {
         val csvFile = File.createTempFile("test", ".csv")
         csvFile.writeText("")
 
-        assertFailsWith<IllegalArgumentException> { converter.from(csvFile.absolutePath) }
+        val exception = assertFailsWith<IllegalArgumentException> { converter.from(csvFile.absolutePath) }
+        assertEquals("File $csvFile is empty", exception.message)
 
         csvFile.delete()
     }
@@ -64,8 +68,28 @@ class CsvJsonConverterTest {
         csvFile.writeText(csvContent)
 
         val resultJson = converter.from(csvFile.absolutePath)
-        assertEquals(expectedJson, resultJson)
+        assertEquals(jsonContent, resultJson)
 
         csvFile.delete()
+    }
+
+    @Test
+    fun `JSON conversion fails due to empty JSON object`() {
+        val emptyJson = JsonArray(emptyList())
+
+        val exception = assertFailsWith<IllegalArgumentException> { converter.to(emptyJson) }
+        assertEquals("JSON array is empty", exception.message)
+    }
+
+    @Test
+    fun `JSON converts to CSV successfully`() {
+        val resultCsv = converter.to(jsonContent)
+        assertEquals(csvContent, resultCsv.trim())
+    }
+
+    @Test
+    fun `JSON converts to CSV successfully with null value`() {
+        val resultCsv = converter.to(jsonContent)
+        assertEquals(csvContent, resultCsv.trim())
     }
 }

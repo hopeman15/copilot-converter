@@ -4,6 +4,10 @@ import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import java.io.File
 
 typealias Csv = String
@@ -34,6 +38,21 @@ object CsvJsonConverter : Converter<Csv, JsonElement> {
     }
 
     override fun to(value: JsonElement): Csv {
-        TODO("Not yet implemented")
+        val jsonArray = value.jsonArray
+        require(jsonArray.isNotEmpty()) { "JSON array is empty" }
+
+        val headers = jsonArray.first().jsonObject.keys
+        return buildString {
+            append(headers.joinToString(","))
+            appendLine()
+            jsonArray.forEach { jsonElement ->
+                val row =
+                    headers.joinToString(",") { key ->
+                        jsonElement.jsonObject[key]?.jsonPrimitive?.contentOrNull ?: ""
+                    }
+                append(row)
+                appendLine()
+            }
+        }
     }
 }
