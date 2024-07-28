@@ -1,11 +1,7 @@
 package com.hellocuriosity.data.converters
 
-import com.hellocuriosity.data.converters.Csv
-import com.hellocuriosity.data.converters.CsvJsonConverter
+import com.hellocuriosity.TestData
 import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.buildJsonArray
-import kotlinx.serialization.json.buildJsonObject
 import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -13,38 +9,6 @@ import kotlin.test.assertFailsWith
 
 class CsvJsonConverterTest {
     private val converter = CsvJsonConverter
-    private val csvContent: Csv =
-        """
-        name,age,city
-        Alice,30,New York
-        Bob,25,Los Angeles
-        Charlie,35,Chicago
-        """.trimIndent()
-
-    private val jsonContent =
-        buildJsonArray {
-            add(
-                buildJsonObject {
-                    put("name", JsonPrimitive("Alice"))
-                    put("age", JsonPrimitive("30"))
-                    put("city", JsonPrimitive("New York"))
-                },
-            )
-            add(
-                buildJsonObject {
-                    put("name", JsonPrimitive("Bob"))
-                    put("age", JsonPrimitive("25"))
-                    put("city", JsonPrimitive("Los Angeles"))
-                },
-            )
-            add(
-                buildJsonObject {
-                    put("name", JsonPrimitive("Charlie"))
-                    put("age", JsonPrimitive("35"))
-                    put("city", JsonPrimitive("Chicago"))
-                },
-            )
-        }
 
     @Test
     fun `CSV conversion fails due to missing CSV file`() {
@@ -67,10 +31,10 @@ class CsvJsonConverterTest {
     @Test
     fun `CSV converts to JSON successfully`() {
         val csvFile = File.createTempFile("test", ".csv")
-        csvFile.writeText(csvContent)
+        csvFile.writeText(TestData.completeCsv)
 
         val resultJson = converter.from(csvFile.absolutePath)
-        assertEquals(jsonContent, resultJson)
+        assertEquals(TestData.completeJson, resultJson)
 
         csvFile.delete()
     }
@@ -85,13 +49,29 @@ class CsvJsonConverterTest {
 
     @Test
     fun `JSON converts to CSV successfully`() {
-        val resultCsv = converter.to(jsonContent)
-        assertEquals(csvContent, resultCsv.trim())
+        val resultCsv = converter.to(TestData.completeJson)
+        assertEquals(TestData.completeCsv, resultCsv.trim())
     }
 
     @Test
     fun `JSON converts to CSV successfully with null value`() {
-        val resultCsv = converter.to(jsonContent)
-        assertEquals(csvContent, resultCsv.trim())
+        val resultCsv = converter.to(TestData.incompleteJson)
+        assertEquals(TestData.emptyCsv, resultCsv.trim())
+    }
+
+    @Test
+    fun `CSV converts to JSON successfully with empty value`() {
+        val json = TestData.incompleteJson
+
+        val resultCsv = converter.to(json)
+        assertEquals(TestData.emptyCsv, resultCsv.trim())
+    }
+
+    @Test
+    fun `CSV converts to JSON successfully with null value`() {
+        val json = TestData.nullJson
+
+        val resultCsv = converter.to(json)
+        assertEquals(TestData.emptyCsv, resultCsv.trim())
     }
 }
