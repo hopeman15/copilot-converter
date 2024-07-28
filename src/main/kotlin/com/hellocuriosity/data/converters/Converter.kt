@@ -1,4 +1,4 @@
-package com.hellocuriosity.converters
+package com.hellocuriosity.data.converters
 
 interface Converter<A, B> {
     fun from(value: A): B
