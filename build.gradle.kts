@@ -15,6 +15,7 @@ repositories {
 }
 
 dependencies {
+    implementation(libs.serialization)
     testImplementation(kotlin("test"))
 }
 
