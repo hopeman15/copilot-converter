@@ -3,6 +3,7 @@ detekt = "1.23.6"
 kotlin = "2.0.0"
 kotlinter = "4.4.1"
 kover = "0.8.3"
+forge = "1.4.0"
 seriialization = "1.7.1"
 
 [plugins]
@@ -11,4 +12,5 @@ kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 
 [libraries]
-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref= "seriialization" }
+serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "seriialization" }
+forge = { module = "io.github.hellocuriosity:model-forge", version.ref = "forge" }

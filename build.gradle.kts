@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version libs.versions.kotlin.get()
+    kotlin("plugin.serialization") version libs.versions.kotlin.get()
 
     // Quality Gate
     alias(libs.plugins.detekt)
@@ -17,6 +18,7 @@ repositories {
 dependencies {
     implementation(libs.serialization)
     testImplementation(kotlin("test"))
+    testImplementation(libs.forge)
 }
 
 tasks.test {
