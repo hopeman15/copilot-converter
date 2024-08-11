@@ -9,7 +9,6 @@ private typealias TestableType = Pair<FinanzflussTransaction.Type?, String?>
 class FinanzflussTransactionTest {
     private val typeData: List<TestableType> =
         listOf(
-            // TestableType(expected, given)
             TestableType(null, null),
             TestableType(FinanzflussTransaction.Type.BOND, "Anleihe"),
             TestableType(FinanzflussTransaction.Type.FOREIGN_CURRENCY, "Fremdwährung"),
@@ -18,7 +17,6 @@ class FinanzflussTransactionTest {
 
     private val transactionTypeData: List<TestableTransaction> =
         listOf(
-            // TestableTransaction(expected, given)
             TestableTransaction(null, null),
             TestableTransaction(FinanzflussTransaction.TransactionType.BOOKING, "Einbuchung"),
             TestableTransaction(FinanzflussTransaction.TransactionType.BUY, "Kauf"),
