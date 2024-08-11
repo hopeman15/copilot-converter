@@ -8,7 +8,6 @@ private typealias Testable = Pair<CoinbaseTransaction.TransactionType?, String?>
 class CoinbaseTransactionTest {
     private val data: List<Testable> =
         listOf(
-            // Testable(expected, given)
             Testable(null, null),
             Testable(CoinbaseTransaction.TransactionType.BUY, "Buy"),
             Testable(CoinbaseTransaction.TransactionType.CONVERT, "Convert"),
