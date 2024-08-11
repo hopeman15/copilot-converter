@@ -35,9 +35,12 @@ class CryptoExtTest {
             TestableCrypto("Ronin", "RONIN"),
             TestableCrypto("The Sandbox", "SAND"),
             TestableCrypto("USD Coin", "USDC"),
+            TestableCrypto("Vara", "VARA"),
+            TestableCrypto("VeChain", "VET"),
             TestableCrypto("Stellar", "XLM"),
             TestableCrypto("Tezos", "XTZ"),
             TestableCrypto("Zcash", "ZEC"),
+            TestableCrypto("ZetaChain", "ZETA"),
             TestableCrypto("0x", "ZRX"),
         )
 

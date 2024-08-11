@@ -4,6 +4,7 @@ import com.hellocuriosity.data.models.coinbase.CoinbaseTransaction
 import com.hellocuriosity.data.models.finanzfluss.FinanzflussTransaction
 import com.hellocuriosity.providers.InstantProvider.toString
 import com.hellocuriosity.utils.toComma
+import com.hellocuriosity.utils.toCryptoName
 import com.hellocuriosity.utils.toFinanzflussTransactionType
 import io.github.hellocuriosity.forgery
 import kotlin.test.Test
@@ -20,7 +21,7 @@ class CoinbaseToFinanzflussConverterTest {
             FinanzflussTransaction(
                 date = transaction.date.toString(),
                 isin = transaction.asset,
-                name = "Coinbase",
+                name = transaction.asset.toCryptoName(),
                 type = FinanzflussTransaction.Type.FOREIGN_CURRENCY.value,
                 transaction = transaction.type.toFinanzflussTransactionType()?.value,
                 price = transaction.priceAtTransaction.toComma(),

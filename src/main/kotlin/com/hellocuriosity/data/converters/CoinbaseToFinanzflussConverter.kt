@@ -4,6 +4,7 @@ import com.hellocuriosity.data.models.coinbase.CoinbaseTransaction
 import com.hellocuriosity.data.models.finanzfluss.FinanzflussTransaction
 import com.hellocuriosity.providers.InstantProvider.toString
 import com.hellocuriosity.utils.toComma
+import com.hellocuriosity.utils.toCryptoName
 import com.hellocuriosity.utils.toFinanzflussTransactionType
 
 object CoinbaseToFinanzflussConverter : Converter<CoinbaseTransaction, FinanzflussTransaction> {
@@ -11,7 +12,7 @@ object CoinbaseToFinanzflussConverter : Converter<CoinbaseTransaction, Finanzflu
         FinanzflussTransaction(
             date = value.date.toString(),
             isin = value.asset,
-            name = "Coinbase",
+            name = value.asset.toCryptoName(),
             type = FinanzflussTransaction.Type.FOREIGN_CURRENCY.value,
             transaction = value.type.toFinanzflussTransactionType()?.value,
             price = value.priceAtTransaction.toComma(),

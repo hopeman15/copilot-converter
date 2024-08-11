@@ -28,9 +28,12 @@ fun String?.toCryptoName(): String? =
         "RONIN" -> "Ronin"
         "SAND" -> "The Sandbox"
         "USDC" -> "USD Coin"
+        "VARA" -> "Vara"
+        "VET" -> "VeChain"
         "XLM" -> "Stellar"
         "XTZ" -> "Tezos"
         "ZEC" -> "Zcash"
+        "ZETA" -> "ZetaChain"
         "ZRX" -> "0x"
         else -> this
     }
