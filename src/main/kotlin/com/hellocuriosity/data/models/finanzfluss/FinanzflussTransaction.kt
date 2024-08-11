@@ -7,27 +7,27 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class FinanzflussTransaction(
     @SerialName("Datum")
-    val date: String,
+    val date: String?,
     @SerialName("ISIN")
-    val isin: String,
+    val isin: String?,
     @SerialName("Name")
-    val name: String,
+    val name: String?,
     @SerialName("Typ")
-    val type: Type,
+    val type: Type?,
     @SerialName("Transaktion")
-    val transaction: TransactionType,
+    val transaction: TransactionType?,
     @SerialName("Preis")
-    val price: Double,
+    val price: Double?,
     @SerialName("Anzahl")
-    val amount: Int,
+    val amount: Double?,
     @SerialName("Gebühren")
-    val fees: Double,
+    val fees: Double?,
     @SerialName("Steuern")
-    val taxes: Double,
+    val taxes: Double?,
     @SerialName("Währung")
-    val currency: String,
+    val currency: String?,
     @SerialName("Wechselkurs")
-    val exchangeRate: Double,
+    val exchangeRate: Double?,
 ) {
     enum class Type(
         val value: String,

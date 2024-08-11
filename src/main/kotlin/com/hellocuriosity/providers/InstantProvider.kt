@@ -17,7 +17,7 @@ object InstantProvider {
                 .toInstant()
         }
 
-    fun Instant?.toString(pattern: String?): String? =
+    fun Instant?.toString(pattern: String? = FINANZFLUSS_DATE_TIME_FORMAT): String? =
         this?.let { date ->
             pattern?.toFormat()?.let {
                 date.atZone(ZoneId.systemDefault()).format(it)
