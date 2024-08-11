@@ -1,10 +1,11 @@
 package com.hellocuriosity.data.models.coinbase
 
 import com.hellocuriosity.utils.safeFindEnumCase
+import java.time.Instant
 
 data class CoinbaseTransaction(
     val id: String? = null,
-    val timestamp: String? = null,
+    val date: Instant? = null,
     val type: TransactionType? = null,
     val asset: String? = null,
     val quantityTransacted: Double? = null,

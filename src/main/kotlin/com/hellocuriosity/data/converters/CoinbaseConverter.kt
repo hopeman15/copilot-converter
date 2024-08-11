@@ -3,13 +3,15 @@ package com.hellocuriosity.data.converters
 import com.hellocuriosity.data.models.coinbase.CoinbaseRaw
 import com.hellocuriosity.data.models.coinbase.CoinbaseTransaction
 import com.hellocuriosity.data.models.coinbase.toCoinbaseTransactionType
+import com.hellocuriosity.providers.InstantProvider.COINBASE_DATE_TIME_FORMAT
+import com.hellocuriosity.providers.InstantProvider.toInstantFrom
 import com.hellocuriosity.utils.currencyToDouble
 
 object CoinbaseConverter : Converter<CoinbaseRaw, CoinbaseTransaction> {
     override fun from(value: CoinbaseRaw): CoinbaseTransaction =
         CoinbaseTransaction(
             id = value.id,
-            timestamp = value.timestamp,
+            date = value.timestamp.toInstantFrom(COINBASE_DATE_TIME_FORMAT),
             type = value.type.toCoinbaseTransactionType(),
             asset = value.asset,
             quantityTransacted = value.quantityTransacted?.toDoubleOrNull(),

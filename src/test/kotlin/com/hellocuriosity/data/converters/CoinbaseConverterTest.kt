@@ -3,6 +3,8 @@ package com.hellocuriosity.data.converters
 import com.hellocuriosity.data.models.coinbase.CoinbaseRaw
 import com.hellocuriosity.data.models.coinbase.CoinbaseTransaction
 import com.hellocuriosity.data.models.coinbase.toCoinbaseTransactionType
+import com.hellocuriosity.providers.InstantProvider.COINBASE_DATE_TIME_FORMAT
+import com.hellocuriosity.providers.InstantProvider.toInstantFrom
 import com.hellocuriosity.utils.currencyToDouble
 import io.github.hellocuriosity.ModelForge
 import io.github.hellocuriosity.addProvider
@@ -36,11 +38,11 @@ class CoinbaseConverterTest {
 
     @Test
     fun `Coinbase conversion raw to transaction is successful`() {
-        val transaction: CoinbaseRaw = forge.build()
+        val transaction: CoinbaseRaw = forge.build<CoinbaseRaw>().copy(timestamp = "2024-07-15 06:22:17 UTC")
         val expected =
             CoinbaseTransaction(
                 id = transaction.id,
-                timestamp = transaction.timestamp,
+                date = transaction.timestamp.toInstantFrom(COINBASE_DATE_TIME_FORMAT),
                 type = transaction.type.toCoinbaseTransactionType(),
                 asset = transaction.asset,
                 quantityTransacted = transaction.quantityTransacted?.toDoubleOrNull(),
@@ -56,11 +58,12 @@ class CoinbaseConverterTest {
 
     @Test
     fun `Coinbase conversion raw to transaction is successful with null quantity`() {
-        val transaction: CoinbaseRaw = forge.build<CoinbaseRaw>().copy(quantityTransacted = null)
+        val transaction: CoinbaseRaw =
+            forge.build<CoinbaseRaw>().copy(timestamp = "2024-07-15 06:22:17 UTC", quantityTransacted = null)
         val expected =
             CoinbaseTransaction(
                 id = transaction.id,
-                timestamp = transaction.timestamp,
+                date = transaction.timestamp.toInstantFrom(COINBASE_DATE_TIME_FORMAT),
                 type = transaction.type.toCoinbaseTransactionType(),
                 asset = transaction.asset,
                 quantityTransacted = transaction.quantityTransacted?.toDoubleOrNull(),
