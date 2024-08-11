@@ -31,7 +31,7 @@ class CsvJsonConverterTest {
     @Test
     fun `CSV converts to JSON successfully`() {
         val csvFile = File.createTempFile("test", ".csv")
-        csvFile.writeText(TestData.completeCsv)
+        csvFile.writeText(TestData.readCsv)
 
         val resultJson = converter.from(csvFile.absolutePath)
         assertEquals(TestData.completeJson, resultJson)
