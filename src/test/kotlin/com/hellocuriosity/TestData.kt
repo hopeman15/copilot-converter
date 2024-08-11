@@ -59,12 +59,20 @@ object TestData {
             },
         )
 
-    val completeCsv: Csv =
+    val readCsv: Csv =
         """
         name,age,city
         Alice,30,New York
         Bob,25,Los Angeles
         Charlie,35,Chicago
+        """.trimIndent()
+
+    val completeCsv: Csv =
+        """
+        name;age;city
+        Alice;30;New York
+        Bob;25;Los Angeles
+        Charlie;35;Chicago
         """.trimIndent()
 
     /**
@@ -73,9 +81,9 @@ object TestData {
      */
     val emptyCsv: Csv =
         """
-        name,age,city
-        Alice,30,New York
-        Bob,25,Los Angeles
-        Charlie,35,
+        name;age;city
+        Alice;30;New York
+        Bob;25;Los Angeles
+        Charlie;35;
         """.trimIndent()
 }

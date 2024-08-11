@@ -43,11 +43,11 @@ object CsvJsonConverter : Converter<Csv, JsonElement> {
 
         val headers = jsonArray.first().jsonObject.keys
         return buildString {
-            append(headers.joinToString(","))
+            append(headers.joinToString(";"))
             appendLine()
             jsonArray.forEach { jsonElement ->
                 val row =
-                    headers.joinToString(",") { key ->
+                    headers.joinToString(";") { key ->
                         jsonElement.jsonObject[key]?.jsonPrimitive?.contentOrNull ?: ""
                     }
                 append(row)
