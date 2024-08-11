@@ -31,7 +31,7 @@ data class CoinbaseTransaction(
         ;
 
         companion object {
-            fun from(string: String): TransactionType? = TransactionType::value.safeFindEnumCase(string)
+            fun from(value: String): TransactionType? = TransactionType::value.safeFindEnumCase(value)
         }
     }
 }
