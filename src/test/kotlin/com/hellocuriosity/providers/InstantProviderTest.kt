@@ -1,23 +1,37 @@
 package com.hellocuriosity.providers
 
 import com.hellocuriosity.providers.InstantProvider.COINBASE_DATE_TIME_FORMAT
+import com.hellocuriosity.providers.InstantProvider.FINANZFLUSS_DATE_TIME_FORMAT
 import com.hellocuriosity.providers.InstantProvider.toInstantFrom
+import com.hellocuriosity.providers.InstantProvider.toString
 import java.time.DateTimeException
 import java.time.Instant
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-private typealias Testable = Triple<Instant?, String?, String?>
+private typealias TestableToInstant = Triple<Instant?, String?, String?>
+private typealias TestableToString = Triple<String?, Instant?, String?>
 
 class InstantProviderTest {
-    private val data: List<Testable> =
+    private val data: List<TestableToInstant> =
         listOf(
-            // Triple(expected, given, pattern),
-            Triple(null, null, null),
-            Triple(null, null, COINBASE_DATE_TIME_FORMAT),
-            Triple(null, "2011-09-06 04:30:00 UTC", null),
-            Triple(Instant.ofEpochMilli(1315283400000), "2011-09-06 04:30:00 UTC", COINBASE_DATE_TIME_FORMAT),
+            TestableToInstant(null, null, null),
+            TestableToInstant(null, null, COINBASE_DATE_TIME_FORMAT),
+            TestableToInstant(null, "2011-09-06 04:30:00 UTC", null),
+            TestableToInstant(
+                Instant.ofEpochMilli(1315283400000),
+                "2011-09-06 04:30:00 UTC",
+                COINBASE_DATE_TIME_FORMAT,
+            ),
+        )
+
+    private val toStringData: List<TestableToString> =
+        listOf(
+            TestableToString(null, null, null),
+            TestableToString(null, null, FINANZFLUSS_DATE_TIME_FORMAT),
+            TestableToString(null, Instant.ofEpochMilli(1315283400000), null),
+            TestableToString("06.09.2011", Instant.ofEpochMilli(1315283400000), FINANZFLUSS_DATE_TIME_FORMAT),
         )
 
     @Test
@@ -30,5 +44,12 @@ class InstantProviderTest {
     @Test
     fun `Instant provider should throw DateTimeException with Unknown Pattern`() {
         assertFailsWith<DateTimeException> { "".toInstantFrom("") }
+    }
+
+    @Test
+    fun `Instant to string should convert successfully`() {
+        toStringData.forEach { (expected, given, pattern) ->
+            assertEquals(expected, given.toString(pattern))
+        }
     }
 }
