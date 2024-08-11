@@ -1,3 +1,5 @@
 package com.hellocuriosity.utils
 
-fun String?.currencyToDouble(currency: String = "€"): Double? = this?.replace(currency, "")?.toDoubleOrNull()
+fun String?.removeCurrency(currency: String = "€"): String? = this?.replace(currency, "")
+
+fun String?.toCommas(): String? = this?.replace('.', ',')

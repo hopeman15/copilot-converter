@@ -3,6 +3,7 @@ package com.hellocuriosity.data.converters
 import com.hellocuriosity.data.models.coinbase.CoinbaseTransaction
 import com.hellocuriosity.data.models.finanzfluss.FinanzflussTransaction
 import com.hellocuriosity.providers.InstantProvider.toString
+import com.hellocuriosity.utils.toCommas
 import com.hellocuriosity.utils.toFinanzflussTransactionType
 import io.github.hellocuriosity.forgery
 import kotlin.test.Test
@@ -20,14 +21,14 @@ class CoinbaseToFinanzflussConverterTest {
                 date = transaction.date.toString(),
                 isin = transaction.asset,
                 name = "Coinbase",
-                type = FinanzflussTransaction.Type.FOREIGN_CURRENCY,
-                transaction = transaction.type.toFinanzflussTransactionType(),
-                price = transaction.priceAtTransaction,
-                amount = transaction.quantityTransacted,
-                fees = transaction.fees,
-                taxes = 0.0,
-                currency = transaction.priceCurrency,
-                exchangeRate = 1.0,
+                type = FinanzflussTransaction.Type.FOREIGN_CURRENCY.value,
+                transaction = transaction.type.toFinanzflussTransactionType()?.value,
+                price = transaction.priceAtTransaction.toCommas(),
+                amount = transaction.quantityTransacted.toCommas(),
+                fees = transaction.fees.toCommas(),
+                taxes = "0,0",
+                currency = transaction.priceCurrency.toCommas(),
+                exchangeRate = "1,0",
             )
         assertEquals(expected, converter.from(transaction))
     }

@@ -5,7 +5,7 @@ import com.hellocuriosity.data.models.coinbase.CoinbaseTransaction
 import com.hellocuriosity.data.models.coinbase.toCoinbaseTransactionType
 import com.hellocuriosity.providers.InstantProvider.COINBASE_DATE_TIME_FORMAT
 import com.hellocuriosity.providers.InstantProvider.toInstantFrom
-import com.hellocuriosity.utils.currencyToDouble
+import com.hellocuriosity.utils.removeCurrency
 import io.github.hellocuriosity.ModelForge
 import io.github.hellocuriosity.addProvider
 import io.github.hellocuriosity.build
@@ -45,12 +45,12 @@ class CoinbaseConverterTest {
                 date = transaction.timestamp.toInstantFrom(COINBASE_DATE_TIME_FORMAT),
                 type = transaction.type.toCoinbaseTransactionType(),
                 asset = transaction.asset,
-                quantityTransacted = transaction.quantityTransacted?.toDoubleOrNull(),
+                quantityTransacted = transaction.quantityTransacted,
                 priceCurrency = transaction.priceCurrency,
-                priceAtTransaction = transaction.priceAtTransaction.currencyToDouble(),
-                subtotal = transaction.subtotal.currencyToDouble(),
-                total = transaction.total.currencyToDouble(),
-                fees = transaction.fees.currencyToDouble(),
+                priceAtTransaction = transaction.priceAtTransaction.removeCurrency(),
+                subtotal = transaction.subtotal.removeCurrency(),
+                total = transaction.total.removeCurrency(),
+                fees = transaction.fees.removeCurrency(),
                 notes = transaction.notes,
             )
         assertEquals(expected, converter.from(transaction))
@@ -66,12 +66,12 @@ class CoinbaseConverterTest {
                 date = transaction.timestamp.toInstantFrom(COINBASE_DATE_TIME_FORMAT),
                 type = transaction.type.toCoinbaseTransactionType(),
                 asset = transaction.asset,
-                quantityTransacted = transaction.quantityTransacted?.toDoubleOrNull(),
+                quantityTransacted = transaction.quantityTransacted,
                 priceCurrency = transaction.priceCurrency,
-                priceAtTransaction = transaction.priceAtTransaction.currencyToDouble(),
-                subtotal = transaction.subtotal.currencyToDouble(),
-                total = transaction.total.currencyToDouble(),
-                fees = transaction.fees.currencyToDouble(),
+                priceAtTransaction = transaction.priceAtTransaction.removeCurrency(),
+                subtotal = transaction.subtotal.removeCurrency(),
+                total = transaction.total.removeCurrency(),
+                fees = transaction.fees.removeCurrency(),
                 notes = transaction.notes,
             )
         assertEquals(expected, converter.from(transaction))

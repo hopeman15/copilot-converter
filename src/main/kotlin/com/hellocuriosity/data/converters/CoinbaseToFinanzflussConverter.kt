@@ -3,6 +3,7 @@ package com.hellocuriosity.data.converters
 import com.hellocuriosity.data.models.coinbase.CoinbaseTransaction
 import com.hellocuriosity.data.models.finanzfluss.FinanzflussTransaction
 import com.hellocuriosity.providers.InstantProvider.toString
+import com.hellocuriosity.utils.toCommas
 import com.hellocuriosity.utils.toFinanzflussTransactionType
 
 object CoinbaseToFinanzflussConverter : Converter<CoinbaseTransaction, FinanzflussTransaction> {
@@ -11,14 +12,14 @@ object CoinbaseToFinanzflussConverter : Converter<CoinbaseTransaction, Finanzflu
             date = value.date.toString(),
             isin = value.asset,
             name = "Coinbase",
-            type = FinanzflussTransaction.Type.FOREIGN_CURRENCY,
-            transaction = value.type.toFinanzflussTransactionType(),
-            price = value.priceAtTransaction,
-            amount = value.quantityTransacted,
-            fees = value.fees,
-            taxes = 0.0,
-            currency = value.priceCurrency,
-            exchangeRate = 1.0,
+            type = FinanzflussTransaction.Type.FOREIGN_CURRENCY.value,
+            transaction = value.type.toFinanzflussTransactionType()?.value,
+            price = value.priceAtTransaction.toCommas(),
+            amount = value.quantityTransacted.toCommas(),
+            fees = value.fees.toCommas(),
+            taxes = "0,0",
+            currency = value.priceCurrency.toCommas(),
+            exchangeRate = "1,0",
         )
 
     override fun to(value: FinanzflussTransaction): CoinbaseTransaction =
