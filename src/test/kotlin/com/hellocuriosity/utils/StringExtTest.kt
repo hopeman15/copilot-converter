@@ -24,4 +24,9 @@ class StringExtTest {
     fun `Comma should replace a period`() {
         assertEquals("15,00", "15.00".toComma())
     }
+
+    @Test
+    fun `Comma should be null when value is null`() {
+        assertNull(null.toComma())
+    }
 }
