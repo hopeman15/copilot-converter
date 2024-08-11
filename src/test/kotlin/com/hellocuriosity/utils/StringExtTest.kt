@@ -6,22 +6,22 @@ import kotlin.test.assertNull
 
 class StringExtTest {
     @Test
-    fun `Currency to Double should be valid with default implementation`() {
-        assertEquals(15.00, "€15.00".currencyToDouble())
+    fun `Currency symbol should be valid with default implementation`() {
+        assertEquals("15.00", "€15.00".removeCurrency())
     }
 
     @Test
-    fun `Currency to Double should be valid with alternate currency`() {
-        assertEquals(15.00, "$15.00".currencyToDouble("$"))
+    fun `Currency symbol should be valid with alternate currency`() {
+        assertEquals("15.00", "$15.00".removeCurrency("$"))
     }
 
     @Test
-    fun `Currency to Double should be null when not a valid number`() {
-        assertNull("not a number".currencyToDouble())
+    fun `Currency symbol should be null when value is null`() {
+        assertNull(null.removeCurrency())
     }
 
     @Test
-    fun `Currency to Double should be null when value is null`() {
-        assertNull(null.currencyToDouble())
+    fun `Comma should replace a period`() {
+        assertEquals("15,00", "15.00".toComma())
     }
 }

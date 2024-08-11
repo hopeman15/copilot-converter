@@ -8,12 +8,12 @@ data class CoinbaseTransaction(
     val date: Instant? = null,
     val type: TransactionType? = null,
     val asset: String? = null,
-    val quantityTransacted: Double? = null,
+    val quantityTransacted: String? = null,
     val priceCurrency: String? = null,
-    val priceAtTransaction: Double? = null,
-    val subtotal: Double? = null,
-    val total: Double? = null,
-    val fees: Double? = null,
+    val priceAtTransaction: String? = null,
+    val subtotal: String? = null,
+    val total: String? = null,
+    val fees: String? = null,
     val notes: String? = null,
 ) {
     enum class TransactionType(

@@ -5,7 +5,7 @@ import com.hellocuriosity.data.models.coinbase.CoinbaseTransaction
 import com.hellocuriosity.data.models.coinbase.toCoinbaseTransactionType
 import com.hellocuriosity.providers.InstantProvider.COINBASE_DATE_TIME_FORMAT
 import com.hellocuriosity.providers.InstantProvider.toInstantFrom
-import com.hellocuriosity.utils.currencyToDouble
+import com.hellocuriosity.utils.removeCurrency
 
 object CoinbaseConverter : Converter<CoinbaseRaw, CoinbaseTransaction> {
     override fun from(value: CoinbaseRaw): CoinbaseTransaction =
@@ -14,12 +14,12 @@ object CoinbaseConverter : Converter<CoinbaseRaw, CoinbaseTransaction> {
             date = value.timestamp.toInstantFrom(COINBASE_DATE_TIME_FORMAT),
             type = value.type.toCoinbaseTransactionType(),
             asset = value.asset,
-            quantityTransacted = value.quantityTransacted?.toDoubleOrNull(),
+            quantityTransacted = value.quantityTransacted,
             priceCurrency = value.priceCurrency,
-            priceAtTransaction = value.priceAtTransaction.currencyToDouble(),
-            subtotal = value.subtotal.currencyToDouble(),
-            total = value.total.currencyToDouble(),
-            fees = value.fees.currencyToDouble(),
+            priceAtTransaction = value.priceAtTransaction.removeCurrency(),
+            subtotal = value.subtotal.removeCurrency(),
+            total = value.total.removeCurrency(),
+            fees = value.fees.removeCurrency(),
             notes = value.notes,
         )
 

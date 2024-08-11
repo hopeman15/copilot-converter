@@ -13,21 +13,21 @@ data class FinanzflussTransaction(
     @SerialName("Name")
     val name: String?,
     @SerialName("Typ")
-    val type: Type?,
+    val type: String?,
     @SerialName("Transaktion")
-    val transaction: TransactionType?,
+    val transaction: String?,
     @SerialName("Preis")
-    val price: Double?,
+    val price: String?,
     @SerialName("Anzahl")
-    val amount: Double?,
+    val amount: String?,
     @SerialName("Gebühren")
-    val fees: Double?,
+    val fees: String?,
     @SerialName("Steuern")
-    val taxes: Double?,
+    val taxes: String?,
     @SerialName("Währung")
     val currency: String?,
     @SerialName("Wechselkurs")
-    val exchangeRate: Double?,
+    val exchangeRate: String?,
 ) {
     enum class Type(
         val value: String,
