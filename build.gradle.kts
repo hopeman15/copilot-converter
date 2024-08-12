@@ -19,6 +19,7 @@ dependencies {
     implementation(libs.serialization)
     testImplementation(kotlin("test"))
     testImplementation(libs.forge)
+    testImplementation(libs.mockk)
 }
 
 tasks.test {
