@@ -4,7 +4,7 @@ kotlin = "2.0.0"
 kotlinter = "4.4.1"
 kover = "0.8.3"
 forge = "1.4.0"
-seriialization = "1.7.1"
+seriialization = "1.7.2"
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
