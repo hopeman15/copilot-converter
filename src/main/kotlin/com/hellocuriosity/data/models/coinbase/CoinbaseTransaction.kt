@@ -28,6 +28,7 @@ data class CoinbaseTransaction(
         SELL("Sell"),
         SEND("Send"),
         STAKING("Staking Income"),
+        WITHDRAWAL("Withdrawal"),
         ;
 
         companion object {
