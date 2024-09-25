@@ -47,6 +47,10 @@ class CoinbaseExtTest {
                 FinanzflussTransaction.TransactionType.DIVIDEND,
                 CoinbaseTransaction.TransactionType.STAKING,
             ),
+            Testable(
+                FinanzflussTransaction.TransactionType.DERECOGNITION,
+                CoinbaseTransaction.TransactionType.WITHDRAWAL,
+            ),
         )
 
     @Test

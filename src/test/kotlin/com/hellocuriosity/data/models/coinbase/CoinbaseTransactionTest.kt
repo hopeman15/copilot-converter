@@ -18,6 +18,7 @@ class CoinbaseTransactionTest {
             Testable(CoinbaseTransaction.TransactionType.SELL, "Sell"),
             Testable(CoinbaseTransaction.TransactionType.SEND, "Send"),
             Testable(CoinbaseTransaction.TransactionType.STAKING, "Staking Income"),
+            Testable(CoinbaseTransaction.TransactionType.WITHDRAWAL, "Withdrawal"),
         )
 
     @Test

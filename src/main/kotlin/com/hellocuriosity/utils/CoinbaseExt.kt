@@ -14,5 +14,6 @@ fun CoinbaseTransaction.TransactionType?.toFinanzflussTransactionType(): Finanzf
         CoinbaseTransaction.TransactionType.SELL -> FinanzflussTransaction.TransactionType.SELL
         CoinbaseTransaction.TransactionType.SEND -> FinanzflussTransaction.TransactionType.DERECOGNITION
         CoinbaseTransaction.TransactionType.STAKING -> FinanzflussTransaction.TransactionType.DIVIDEND
+        CoinbaseTransaction.TransactionType.WITHDRAWAL -> FinanzflussTransaction.TransactionType.DERECOGNITION
         else -> null
     }
