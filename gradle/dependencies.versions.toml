@@ -1,7 +1,7 @@
 [versions]
 detekt = "1.23.7"
 kotlin = "2.0.0"
-kotlinter = "4.5.0"
+kotlinter = "5.0.1"
 kover = "0.9.0"
 forge = "1.5.1"
 seriialization = "1.7.3"
